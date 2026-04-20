@@ -1,6 +1,15 @@
 <?php
 session_start();
 
+
+// Set timezone (important for correct date)
+date_default_timezone_set('Asia/Kolkata');
+
+// Get last day of current month
+$lastDate = date('jS F Y', strtotime('last day of this month'));
+
+
+
 /* Handle UTM from AJAX (VERY IMPORTANT) */
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
@@ -74,7 +83,7 @@ $_SESSION['page_url'] =
 
 <?php include "navbar.php"; ?>
 
-<section id="home" class="scroll-mt-20 mt-[75px] bg-center bg-[url('assets/img/bg-banner-mobile.webp')] md:bg-[url('assets/img/bg-banner-desktop.webp')] bg-cover bg-no-repeat py-8 md:py-28">
+<section id="home" class="scroll-mt-20 md:mt-[75px] bg-center bg-[url('assets/img/bg-banner-mobile.webp')] md:bg-[url('assets/img/bg-banner-desktop.webp')] bg-cover bg-no-repeat py-8 md:py-28">
 
   <div class="max-w-[1150px] mx-auto px-4 flex flex-col md:flex-row gap-2 md:gap-10 items-left md:items-center justify-between">
 
@@ -86,7 +95,7 @@ $_SESSION['page_url'] =
       </p>
 
       <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#FFC107] to-[#FFF3A3] bg-clip-text text-transparent">
-  1-Year Online MBA*
+   Online MBA*
 </h1>
 
       <div>
@@ -114,12 +123,12 @@ $_SESSION['page_url'] =
         </div>
       </div>
 
-      <button onclick="openForm('brochure-form.php?pdf=brochure.pdf')" class="bg-yellow-400 text-black font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition flex items-center gap-2 mt-5"> Download Brochure <i class="fas fa-download ml-1"></i></button>
+      <button onclick="openForm('brochure-form.php?pdf=brochure.pdf')" class="bg-yellow-400 text-black font-semibold px-4 py-3 rounded-full hover:bg-yellow-300 transition flex items-center gap-2 mt-5"> Download Brochure <i class="fas fa-download ml-1"></i></button>
 
       <!-- Deadline -->
       <p class="my-4 text-gray-200 italic">
         Admission Deadline:<br>
-        <span class="text-yellow-400 font-semibold">"30th March 2026"</span>
+        <span class="text-yellow-400 font-semibold">"<?php echo $lastDate; ?>"</span>
       </p>
 
     </div>
@@ -194,7 +203,7 @@ $_SESSION['page_url'] =
       <div class="bg-white rounded-3xl px-2 py-6 md:p-12 shadow-2xl mx-auto flex flex-col items-center text-center">
          <h2 class="text-xl md:text-4xl font-bold mt-3 text-gray-900 mb-1">ABOUT – MASTER OF BUSINESS ADMINISTRATION</h2>
          <p class="text-gray-600 mb-4 md:text-xl font-medium leading-relaxed text-sm">One Year Online MBA</p>
-         <p class="text-gray-800 mb-4 leading-relaxed px-4 text-center text-sm md:text-base"><span class="block mb-2">This program 1 year online MBA has been designed for learners and professionals who want to accelerate their careers despite their prior commitments. This highly flexible one year online MBA course allows them to gain knowledge in advanced business studies, enhances leadership skills and offers global exposure.</span><span class="block mb-2">This course differs from the traditional program pattern. The online MBA degree in one year course extends an opportunity for individuals to balance both their studies and work while achieving their career ambitions.</span><span class="block mb-2">The 1 year MBA program online benefits students with a curriculum that makes them industry-ready and offers practical learning. It prepares students for real-world challenges. It transforms careers and growth, supporting the leadership roles. Overall, this one year online MBA offers convenient learning, which is credible and leads to career advancement.</span></p>
+         <p class="text-gray-800 mb-4 leading-relaxed px-4 text-center text-sm md:text-base"><span class="block mb-2">This program online MBA has been designed for learners and professionals who want to accelerate their careers despite their prior commitments. This highly flexible one year online MBA course allows them to gain knowledge in advanced business studies, enhances leadership skills and offers global exposure.</span><span class="block mb-2">This course differs from the traditional program pattern. The online MBA degree in one year course extends an opportunity for individuals to balance both their studies and work while achieving their career ambitions.</span><span class="block mb-2">The Online MBA program online benefits students with a curriculum that makes them industry-ready and offers practical learning. It prepares students for real-world challenges. It transforms careers and growth, supporting the leadership roles. Overall, this one year online MBA offers convenient learning, which is credible and leads to career advancement.</span></p>
          <div class="w-full grid grid-cols-2 md:grid-cols-3 p-2 justify-around items-center gap-6 mb-8">
             <div class="flex flex-col items-center space-y-2">
                <div class="bg-blue-50 p-3 rounded-full text-[#0a70b8]">
@@ -254,7 +263,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">AI for Business</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This program offers a better understanding of how artificial intelligence drives business decisions, automation, and innovation. This specialization in a 1 year online MBA enhances the leverage of  AI tools so that one can be efficient and grow strategically.
+                                This program offers a better understanding of how artificial intelligence drives business decisions, automation, and innovation. This specialization in a online MBA enhances the leverage of  AI tools so that one can be efficient and grow strategically.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -327,7 +336,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Marketing Management</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This program assists in strengthening the tactics of master branding and digital marketing. It helps learners to learn the consumer behaviour strategies. This 1 year MBA programs online, this specialization helps individuals drive growth, create impactful campaigns in competitive industries.
+                                This program assists in strengthening the tactics of master branding and digital marketing. It helps learners to learn the consumer behaviour strategies. This Online MBA programs online, this specialization helps individuals drive growth, create impactful campaigns in competitive industries.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -381,7 +390,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Information Technology</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This specialization in 1 year online MBA is a blend of business and technology. It promotes IT strategy and transformation in the digital world, which equips individuals to lead tech-driven initiatives in modern organisations. Overall enhances their career profile for successful future.
+                                This specialization in Online MBA is a blend of business and technology. It promotes IT strategy and transformation in the digital world, which equips individuals to lead tech-driven initiatives in modern organisations. Overall enhances their career profile for successful future.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -435,7 +444,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Business Analytics</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This 1 year program MBA, specialization in business analytics, focuses on data-driven decision-making. It teaches learners tactics of predictive modelling and business intelligence. Overall, this program bridges the gap between data analysis and strategic business outcomes.
+                                This Online MBA program, specialization in business analytics, focuses on data-driven decision-making. It teaches learners tactics of predictive modelling and business intelligence. Overall, this program bridges the gap between data analysis and strategic business outcomes.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -453,7 +462,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">International Business</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This specialization in MBA explores global markets, teaches cross-cultural management, and offers strategies needed for international marketing. Overall, this domain in 1 year MBA programs prepares learners for careers in the global business world of multinational corporations.
+                                This specialization in MBA explores global markets, teaches cross-cultural management, and offers strategies needed for international marketing. Overall, this domain in Online MBA programs prepares learners for careers in the global business world of multinational corporations.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -471,7 +480,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Project Management</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This domain in 1 year executive MBA online develop expertise in accessible planning, executing, and delivering projects on time. Overall, this specialization enhances the abilities of working professionals to manage timelines and resources, which is reflected in the performance of teams.
+                                This domain in executive MBA online develop expertise in accessible planning, executing, and delivering projects on time. Overall, this specialization enhances the abilities of working professionals to manage timelines and resources, which is reflected in the performance of teams.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -507,7 +516,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">International Finance</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This domain equips students to gain insights into global financial markets, forex management, and international investments. This online MBA 1 year course promotes high-level finance roles among professionals across borders.
+                                This domain equips students to gain insights into global financial markets, forex management, and international investments. This online MBA course promotes high-level finance roles among professionals across borders.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -525,7 +534,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Retail Management</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This specialization in 1 year MBA schools offers a better understanding of retail operations. Students gain knowledge of merchandising and consumer trends. Overall, this specialization equips students to manage retail businesses and enhance customer experience in competitive markets.
+                                This specialization in Online MBA schools offers a better understanding of retail operations. Students gain knowledge of merchandising and consumer trends. Overall, this specialization equips students to manage retail businesses and enhance customer experience in competitive markets.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -561,7 +570,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Fintech Management</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This program explores digital finance and blockchain. Students get in-depth knowledge of financial technologies, which is required for the present-day transforming industry. Overall, 1 year executive MBA specialization enhances the opportunity  for innovative roles in fintech startups.
+                                This program explores digital finance and blockchain. Students get in-depth knowledge of financial technologies, which is required for the present-day transforming industry. Overall, Online executive MBA specialization enhances the opportunity  for innovative roles in fintech startups.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -579,7 +588,7 @@ $_SESSION['page_url'] =
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h3 class="text-[16px] font-bold text-black pb-2">Banking and Finance Management</h3>
                             <p class="text-gray-600 text-[12px] leading-relaxed">
-                                This specialization of MBA online learning in 1 year builds expertise in banking systems, credit management, and financial services. It prepares students for promising careers in banking and financial institutions and organisations.
+                                This specialization of MBA online learning builds expertise in banking systems, credit management, and financial services. It prepares students for promising careers in banking and financial institutions and organisations.
                             </p>
                             <span class="text-gray-800 text-[12px] flex items-center pt-2"><i class="mr-1 far fa-clock"></i> 12 Months</span>
                             <button class="bg-[#1c3569] text-white font-bold py-2 px-4 mt-4 rounded text-sm w-full rounded-full" onclick="openForm('default-form.php')">
@@ -629,7 +638,7 @@ $_SESSION['page_url'] =
          <div class="w-full lg:w-7/12 flex flex-col items-center px-6 mr-0 md:mr-20 mt-30 md:mt-0">
             <div class="mb-12 text-center">
                <h2 class="text-3xl md:text-4xl font-extrabold uppercase text-[#00AEEF]">Key Highlights</h2>
-               <p class="text-xl md:text-3xl lg:text-4xl font-bold mt-1 text-white">Online 1 Year MBA</p>
+               <p class="text-xl md:text-3xl lg:text-4xl font-bold mt-1 text-white">Online MBA</p>
             </div>
             <div class="w-full max-w-3xl">
                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -641,7 +650,7 @@ $_SESSION['page_url'] =
                      <div class="w-14 h-14 flex items-center justify-center rounded-full mb-3"><img alt="Fast-Track Your Career Growth" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/Fast-Track Your Career Growth.webp"></div>
                      <div class="space-y-2">
                         <h3 class="text-sm md:text-base font-bold text-white leading-snug">Fast-Track Your Career Growth</h3>
-                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed">Accelerate career growth quickly through a flexible 1 year online MBA </p>
+                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed">Accelerate career growth quickly through a flexible online MBA </p>
                      </div>
                   </div>
                   <div class="
@@ -683,7 +692,7 @@ $_SESSION['page_url'] =
                      <div class="w-14 h-14 flex items-center justify-center rounded-full mb-3"><img alt="Flexible Learning for Working Professionals" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/Flexible Learning Designed for Working Professionals (1).webp"></div>
                      <div class="space-y-2">
                         <h3 class="text-sm md:text-base font-bold text-white leading-snug">Flexible Learning for Working Professionals</h3>
-                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed">Study anytime, anywhere with a convenient 1 year online MBA</p>
+                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed">Study anytime, anywhere with a convenient online MBA</p>
                      </div>
                   </div>
                   <div class="
@@ -693,7 +702,7 @@ $_SESSION['page_url'] =
                      <div class="w-14 h-14 flex items-center justify-center rounded-full mb-3"><img alt="Turn knowledge into real-world projects" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/highligh-02-69c2866f323d1.webp"></div>
                      <div class="space-y-2">
                         <h3 class="text-sm md:text-base font-bold text-white leading-snug">Turn knowledge into real-world projects</h3>
-                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed"> Gain practical exposure through hands-on learning in 1 year MBA programs online</p>
+                        <p class="text-xs md:text-sm text-white/70 max-w-xs mx-auto leading-relaxed"> Gain practical exposure through hands-on learning in Online MBA programs</p>
                      </div>
                   </div>
                </div>
@@ -718,7 +727,7 @@ $_SESSION['page_url'] =
          <div class="bg-white rounded-2xl shadow-xl overflow-hidden text-center flex flex-col items-center pb-6">
             <div class="relative h-44 sm:h-52 w-full mb-6"><img alt="FRESH GRADUATES" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" src="assets/img/fresh-graduate-69c2858302fb4.webp"></div>
             <p class="text-lg md:text-[16px] text-white bg-[#1C3569] px-6 py-2 rounded-full transform -translate-y-12 shadow-lg -mb-6 whitespace-nowrap uppercase tracking-wider">FRESH GRADUATES</p>
-            <p class="text-black text-sm px-6 font-medium leading-relaxed">Graduates are getting an opportunity to start careers quickly with a 1 year online MBA, gaining essential business skills and exposure.</p>
+            <p class="text-black text-sm px-6 font-medium leading-relaxed">Graduates are getting an opportunity to start careers quickly with a online MBA, gaining essential business skills and exposure.</p>
          </div>
          <div class="bg-white rounded-2xl shadow-xl overflow-hidden text-center flex flex-col items-center pb-6">
             <div class="relative h-44 sm:h-52 w-full mb-6"><img alt="WORKING PROFESSIONALS" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" src="assets/img/working-professional-69c285821c9b2.webp"></div>
@@ -776,7 +785,7 @@ $_SESSION['page_url'] =
 <section class="py-12 md:py-14 bg-[#f4f6f9]">
    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-6 md:mb-8">
-         <h2 class="text-2xl md:text-5xl font-bold text-gray-900 leading-snug">How to Enroll in a 1 Year Online MBA?            </h2>
+         <h2 class="text-2xl md:text-5xl font-bold text-gray-900 leading-snug">How to Enroll in an Online MBA?            </h2>
          <p class="text-black text-base md:text-2xl">Admission Process</p>
       </div>
       <div class="relative">
@@ -805,7 +814,7 @@ $_SESSION['page_url'] =
                   </div>
                   <div class="mt-3 w-full">
                      <div class="border border-dashed border-gray-400 rounded-md px-2 md:px-3 py-2 min-h-12 flex items-center justify-center">
-                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Connect with experts to understand the 1 year MBA programs and choose the right specialization of MBA degree in one year based on your profile.</p>
+                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Connect with experts to understand the Online MBA programs and choose the right specialization of MBA degree in one year based on your profile.</p>
                      </div>
                   </div>
                </div>
@@ -819,7 +828,7 @@ $_SESSION['page_url'] =
                   </div>
                   <div class="mt-3 w-full">
                      <div class="border border-dashed border-gray-400 rounded-md px-2 md:px-3 py-2 min-h-12 flex items-center justify-center">
-                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Select from the top 1 year MBA schools offering flexible and industry-relevant MBA one year course options tailored to your specialization and interest.</p>
+                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Select from the top Online MBA schools offering flexible and industry-relevant MBA one year course options tailored to your specialization and interest.</p>
                      </div>
                   </div>
                </div>
@@ -833,7 +842,7 @@ $_SESSION['page_url'] =
                   </div>
                   <div class="mt-3 w-full">
                      <div class="border border-dashed border-gray-400 rounded-md px-2 md:px-3 py-2 min-h-12 flex items-center justify-center">
-                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Secure your seat in a 1 year program MBA by completing the fee process. Get access to a flexible and career-focused learning experience.</p>
+                        <p class="text-[10px] md:text-[11px] text-gray-600 leading-relaxed text-center"> Secure your seat in a Online program MBA by completing the fee process. Get access to a flexible and career-focused learning experience.</p>
                      </div>
                   </div>
                </div>
@@ -887,7 +896,7 @@ $_SESSION['page_url'] =
             <div class="shrink-0 mb-3 md:mb-0 md:mr-6"><img alt="Industry-Aligned Specializations" loading="lazy" width="50" height="45" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/why-choose-01-69c28580993bb.webp"></div>
             <div>
                <h4 class="font-extrabold text-[#112255] mb-1 text-sm md:text-xl leading-tight">Industry-Aligned Specializations</h4>
-               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Choose relevant domains within the top 1 year MBA programs.</p>
+               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Choose relevant domains within the top Online MBA programs.</p>
             </div>
          </div>
          <div class="bg-white rounded-2xl p-4 md:p-10  flex flex-col items-center text-center md:text-left  md:flex-row md:items-center  hover:scale-[1.02] transition-all duration-300 shadow-xl">
@@ -901,21 +910,21 @@ $_SESSION['page_url'] =
             <div class="shrink-0 mb-3 md:mb-0 md:mr-6"><img alt="Leadership &amp; Strategy Skills" loading="lazy" width="50" height="45" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/why-choose-02-69c285814da05.webp"></div>
             <div>
                <h4 class="font-extrabold text-[#112255] mb-1 text-sm md:text-xl leading-tight">Leadership &amp; Strategy Skills</h4>
-               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Build decision-making expertise in a MBA 1 year course.</p>
+               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Build decision-making expertise in a Online MBA course.</p>
             </div>
          </div>
          <div class="bg-white rounded-2xl p-4 md:p-10  flex flex-col items-center text-center md:text-left  md:flex-row md:items-center  hover:scale-[1.02] transition-all duration-300 shadow-xl">
             <div class="shrink-0 mb-3 md:mb-0 md:mr-6"><img alt="Hands-On Industry Projects" loading="lazy" width="50" height="45" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/why-choose-03-69c285814b9f8.webp"></div>
             <div>
                <h4 class="font-extrabold text-[#112255] mb-1 text-sm md:text-xl leading-tight">Hands-On Industry Projects</h4>
-               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Solve real challenges in a 1 year program MBA.</p>
+               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Solve real challenges in a Online program MBA.</p>
             </div>
          </div>
          <div class="bg-white rounded-2xl p-4 md:p-10  flex flex-col items-center text-center md:text-left  md:flex-row md:items-center  hover:scale-[1.02] transition-all duration-300 shadow-xl">
             <div class="shrink-0 mb-3 md:mb-0 md:mr-6"><img alt="Global Exposure &amp; Networking" loading="lazy" width="50" height="45" decoding="async" data-nimg="1" class="object-contain" style="color:transparent" src="assets/img/why-choose-03-69c285814b9f8.webp"></div>
             <div>
                <h4 class="font-extrabold text-[#112255] mb-1 text-sm md:text-xl leading-tight">Global Exposure &amp; Networking</h4>
-               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Connect worldwide through advanced 1 year executive MBA.</p>
+               <p class="text-gray-600 text-xs md:text-base font-medium mt-2">Connect worldwide through advanced Online executive MBA.</p>
             </div>
          </div>
       </div>
@@ -936,7 +945,7 @@ $_SESSION['page_url'] =
       <div class="faq-item py-6">
         <button class="faq-button flex justify-between items-center w-full text-left outline-none group">
           <span class="faq-question text-base md:text-md font-semibold text-gray-700 transition-all duration-300">
-            Q1. Is 1 year online MBA have the same relevance as a traditional MBA? 
+            Q1. Is online MBA have the same relevance as a traditional MBA? 
           </span>
           <div class="relative w-5 h-5 flex items-center justify-center flex-shrink-0">
              <div class="absolute w-3 h-[2px] bg-[#003366] rounded-full"></div>
@@ -954,7 +963,7 @@ $_SESSION['page_url'] =
       <div class="faq-item py-6">
         <button class="faq-button flex justify-between items-center w-full text-left outline-none group">
           <span class="faq-question text-base md:text-md font-semibold text-gray-700 transition-all duration-300">
-           Q2. What are the top 5 in demand 1 year MBA program online specializations?
+           Q2. What are the top 5 in demand Online MBA program specializations?
           </span>
           <div class="relative w-5 h-5 flex items-center justify-center flex-shrink-0">
              <div class="absolute w-3 h-[2px] bg-[#003366] rounded-full"></div>
@@ -963,7 +972,7 @@ $_SESSION['page_url'] =
         </button>
         <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
           <p class="pt-4 text-gray-600 text-sm md:text-base leading-relaxed">
-            There are many in-demand specializations of 1 year online MBA course, yet the top 5 are: AI in Business, Finance, Marketing, Digital Finance and Strategy and Leadership.
+            There are many in-demand specializations of online MBA course, yet the top 5 are: AI in Business, Finance, Marketing, Digital Finance and Strategy and Leadership.
           </p>
         </div>
       </div>
@@ -971,7 +980,7 @@ $_SESSION['page_url'] =
       <div class="faq-item py-6">
         <button class="faq-button flex justify-between items-center w-full text-left outline-none group">
           <span class="faq-question text-base md:text-md font-semibold text-gray-700 transition-all duration-300">
-            Q3. Is a 1 year online MBA valid and recognised?
+            Q3. Is a online MBA valid and recognised?
           </span>
           <div class="relative w-5 h-5 flex items-center justify-center flex-shrink-0">
              <div class="absolute w-3 h-[2px] bg-[#003366] rounded-full"></div>
@@ -1016,7 +1025,7 @@ $_SESSION['page_url'] =
         </button>
         <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
           <p class="pt-4 text-gray-600 text-sm md:text-base leading-relaxed">
-            Yes, a 1 year MBA online learning is UGC approved and quite focused on experiential learning. Students are taught through projects and several case studies. 
+            Yes, a MBA online learning is UGC approved and quite focused on experiential learning. Students are taught through projects and several case studies. 
           </p>
         </div>
       </div>

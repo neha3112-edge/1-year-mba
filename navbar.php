@@ -75,7 +75,7 @@
 
 
 <!-- HEADER -->
-<header class="fixed top-0 left-0 w-full bg-white shadow-sm z-[9999] shadow-2xl">
+<header class="md:fixed top-0 left-0 w-full bg-white shadow-sm z-[9999] shadow-2xl">
   <div class="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
     
     <!-- Logo -->

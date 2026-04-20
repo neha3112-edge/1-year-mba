@@ -4,9 +4,9 @@ $base_url = (strpos($_SERVER['REQUEST_URI'], '/assets/forms/') !== false) ? '../
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>1 Year Online MBA | Advance Your Career</title>
-<meta name="title" content="1 Year Online MBA | Advance Your Career">
-<meta name="description" content="Accelerate your career with a 1-year online MBA. Fast-track your path to success with our recognized program." />
+<title>Online MBA Courses | MBA Online Fees & Eligibility - Worldwide Valid in 2026</title>
+<meta name="title" content="Online MBA Courses | MBA Online Fees & Eligibility - Worldwide Valid in 2026">
+<meta name="description" content="Online MBA = Regular MBA | Globally Valid Online MBA Courses. MBA Online Approvals, Specializations, Duration, Eligibility, Fees, & Admissions Open 2026." />
 <meta name="keywords" content="Online MBA">
 <meta name="author" content="Online_MBA">
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
