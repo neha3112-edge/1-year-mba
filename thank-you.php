@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $brochure = $_GET['brochure'] ?? '';
 $compare = $_GET['compare'] ?? '';
 

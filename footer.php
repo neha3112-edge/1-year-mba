@@ -126,146 +126,181 @@ document.getElementById("infoModal").addEventListener("click", function(e) {
 
 
 
-<!-- POPUP -->
+<!-- POPUP — form-template.php se render, iframe nahi -->
 
-<div id="formModal" 
-class="fixed inset-0 bg-black/60 hidden z-[9999] 
-flex items-center justify-center backdrop-blur-sm
-opacity-0 transition-opacity duration-300">
+<?php
+// Popup ke liye default values — JS baad mein title/subtitle update karega
+// form_name aur brochure hidden inputs JS se update honge
+$form_name = "Popup Form";
+$brochure  = "";
+?>
+
+<div id="formModal"
+  class="fixed inset-0 bg-black/60 hidden z-[9999]
+  flex items-center justify-center backdrop-blur-sm
+  opacity-0 transition-opacity duration-300">
 
   <!-- Modal Box -->
   <div id="modalBox"
-    class="bg-[#fff] w-[95%] md:w-[400px] 
+    class="bg-[#fff] w-[95%] md:w-[400px]
     rounded-xl shadow-lg relative p-5
     transform scale-90 translate-y-10 opacity-0
-    transition-all duration-300 ease-out">
+    transition-all duration-300 ease-out overflow-y-auto max-h-[90vh]">
 
-    <button onclick="closeForm()" 
+    <button onclick="closeForm()"
       class="absolute top-2 right-3 text-2xl font-bold hover:text-black text-[#000]">
       &times;
     </button>
 
-    <div id="loader" class="absolute inset-0 flex items-center justify-center bg-white rounded-xl">
-  <div class="animate-spin rounded-full h-10 w-10 border-4 border-gray-300 border-t-black"></div>
-</div>
+    <!-- Dynamic heading — JS se update hoga -->
+    <h2 id="formModalTitle" class="text-[#1C3569] text-center text-[20px] md:text-2xl font-bold mb-1">Apply Now</h2>
+    <p  id="formModalSubtitle" class="text-gray-600 text-center text-sm mb-4">Start your application journey today</p>
 
-    <iframe id="formFrame" class="w-full rounded-xl border-0 opacity-0"></iframe>
+    <!-- form-template.php se form render — ek baar page load pe, zero delay on click -->
+    <?php $popup_form = true; include __DIR__ . "/assets/includes/form-template.php"; ?>
 
   </div>
 </div>
 
 
 <script>
+// Form type configs — sirf title, subtitle aur hidden field values JS update karega
+var _formConfigs = {
+  'default-form.php': {
+    title: 'Apply Now',
+    subtitle: 'Start your application journey today',
+    source: 'Normal Form',
+    brochure: ''
+  },
+  'brochure-form.php': {
+    title: 'Download Brochure',
+    subtitle: 'Get complete program details instantly',
+    source: 'Brochure Form',
+    brochure: ''  // brochure value URL se milegi
+  },
+  'coupon-form.php': {
+    title: 'Get Scholarship Coupon Code',
+    subtitle: 'Our experts will contact you',
+    source: 'Scholarship Form',
+    brochure: ''
+  },
+  'compare-form.php': {
+    title: 'Compare Programs',
+    subtitle: 'Our experts will help you choose the best fit',
+    source: 'Compare Form',
+    brochure: ''
+  }
+};
+
 function openForm(url) {
-  const modal = document.getElementById("formModal");
-  const box = document.getElementById("modalBox");
-  const frame = document.getElementById("formFrame");
-  const loader = document.getElementById("loader");
+  var modal = document.getElementById('formModal');
+  var box   = document.getElementById('modalBox');
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
+  // URL parse karo
+  var parts    = url.split('?');
+  var baseName = parts[0];
+  var params   = parts[1] ? new URLSearchParams(parts[1]) : null;
 
-  // animation delay
-  setTimeout(() => {
-    modal.classList.remove("opacity-0");
-    modal.classList.add("opacity-100");
-
-    box.classList.remove("scale-90", "translate-y-10", "opacity-0");
-    box.classList.add("scale-100", "translate-y-0", "opacity-100");
-  }, 50);
-
-  // show loader
-  loader.style.display = "flex";
-  frame.style.opacity = "0";
-  frame.style.height = "300px";
-
-  // load iframe
-  setTimeout(() => {
-    frame.src = url;
-  }, 300);
-
-  frame.onload = function () {
-    // hide loader
-    loader.style.display = "none";
-
-    try {
-      const doc = frame.contentWindow.document;
-      frame.style.height = doc.body.scrollHeight + "px";
-    } catch (e) {
-      frame.style.height = "600px";
-    }
-
-    frame.style.opacity = "1";
+  // Config lo
+  var cfg = _formConfigs[baseName] || {
+    title: 'Apply Now',
+    subtitle: 'Start your application journey today',
+    source: 'Normal Form',
+    brochure: ''
   };
+
+  // Brochure PDF URL se lo (agar hai)
+  if (baseName === 'brochure-form.php' && params) {
+    cfg.brochure = params.get('pdf') || '';
+  }
+
+  // Title/subtitle update karo
+  document.getElementById('formModalTitle').innerText    = cfg.title;
+  document.getElementById('formModalSubtitle').innerText = cfg.subtitle;
+
+  // Hidden inputs update karo
+  var fnInput = document.querySelector('#formModal input[name="<?php echo $_SESSION["p_f_form_name"] ?? ""; ?>"]');
+  var brInput = document.getElementById('popup-brochure-field');
+
+  // Form reset karo pehle
+  var form = document.querySelector('#modalBox form');
+  if (form) form.reset();
+
+  // Reset ke baad hidden values set karo
+  if (fnInput) fnInput.value = cfg.source;
+  if (brInput) brInput.value = cfg.brochure;
+
+  // Modal show karo — turant, koi delay nahi
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+      box.classList.remove('scale-90', 'translate-y-10', 'opacity-0');
+      box.classList.add('scale-100', 'translate-y-0', 'opacity-100');
+    });
+  });
 }
 
 function closeForm() {
-  const modal = document.getElementById("formModal");
-  const box = document.getElementById("modalBox");
-  const frame = document.getElementById("formFrame");
-  const loader = document.getElementById("loader");
+  var modal = document.getElementById('formModal');
+  var box   = document.getElementById('modalBox');
 
-  modal.classList.remove("opacity-100");
-  modal.classList.add("opacity-0");
+  modal.classList.remove('opacity-100');
+  modal.classList.add('opacity-0');
+  box.classList.remove('scale-100', 'translate-y-0', 'opacity-100');
+  box.classList.add('scale-90', 'translate-y-10', 'opacity-0');
 
-  box.classList.remove("scale-100", "translate-y-0", "opacity-100");
-  box.classList.add("scale-90", "translate-y-10", "opacity-0");
-
-  setTimeout(() => {
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-
-    frame.src = "";
-    frame.style.opacity = "0";
-    frame.style.height = "0px";
-
-    loader.style.display = "flex"; // reset
+  setTimeout(function() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
   }, 300);
 }
+
+// Backdrop click se close
+document.getElementById('formModal').addEventListener('click', function(e) {
+  if (e.target === this) closeForm();
+});
 </script>
-
-
 
 
 <!-- Phone Field Validation Code Start -->
 <script>
-const input = document.querySelector("#phone");
+function initPhoneField(inputId) {
+  var input = document.getElementById(inputId);
+  if (!input) return;
 
-const iti = window.intlTelInput(input, {
-  initialCountry: "in", // default India
-  separateDialCode: true,
-  preferredCountries: ["in", "ae", "us", "gb"],
-  utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
-});
+  var iti = window.intlTelInput(input, {
+    initialCountry: "in",
+    separateDialCode: true,
+    preferredCountries: ["in", "ae", "us", "gb"],
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+  });
 
-// ✅ Auto detect country if user types +971 etc
-input.addEventListener("input", function () {
-  let value = input.value;
+  // Auto detect country if user types +91 etc
+  input.addEventListener("input", function () {
+    if (input.value.startsWith("+")) {
+      iti.setNumber(input.value);
+    }
+    // Only allow digits, limit to 10
+    var numbers = input.value.replace(/\D/g, "");
+    if (numbers.length > 10) numbers = numbers.slice(0, 10);
+    input.value = numbers;
+  });
 
-  if (value.startsWith("+")) {
-    iti.setNumber(value); // auto detect country
-  }
-});
+  // Block non-numeric keys
+  input.addEventListener("keypress", function (e) {
+    if (!/[0-9+]/.test(e.key)) e.preventDefault();
+  });
+}
 
-// ✅ Only numbers allow (no letters)
-input.addEventListener("keypress", function (e) {
-  if (!/[0-9+]/.test(e.key)) {
-    e.preventDefault();
-  }
-});
-</script>
+// Sidebar form phone
+initPhoneField("phone");
 
-<script>
-input.addEventListener("input", function () {
-  let numbers = input.value.replace(/\D/g, "");
-
-  // limit to 10 digits
-  if (numbers.length > 10) {
-    numbers = numbers.slice(0, 10);
-  }
-
-  input.value = numbers;
-});
+// Popup form phone
+initPhoneField("phone-popup");
 </script>
 <!-- Phone Field Validation Code End -->
 
@@ -406,7 +441,7 @@ tailwind.config = {
         canvas.remove();
       }, 5000);
       
-    }, 2000); 
+    }, 00); 
   }
 
   // --- Naya Scroll Logic Addon ---
